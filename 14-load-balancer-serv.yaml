@@ -13,5 +13,5 @@ spec:
   ports: 
   - name: nginx-service-port 
     protocol: TCP
-    port: 80 #this is service port 
+    port: 8081 #this is service port 
     targetPort: 80
