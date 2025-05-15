@@ -6,7 +6,7 @@ metadata:
 
 spec: 
   selector:
-    project: expense 
+    project: expense #This means the Service will automatically route traffic to any Pod that has matching labels.
     module: backend
     environment: dev
   ports: 
