@@ -5,15 +5,15 @@ metadata:
  - name: nginx 
 
 spec: 
- selector:
-   project: expense 
-   module: backend
-   environment: dev
- ports: 
- - name: nginx-service-port 
-   protocol: TCP
-   port: 80 #this is service port 
-   targetPort: 80  #this is container port here you can use names of the ports aswell example: http-web-svc
+  selector:
+    project: expense 
+    module: backend
+    environment: dev
+  ports: 
+  - name: nginx-service-port 
+    protocol: TCP
+    port: 80 #this is service port 
+    targetPort: 80  #this is container port here you can use names of the ports aswell example: http-web-svc
 
       
  
