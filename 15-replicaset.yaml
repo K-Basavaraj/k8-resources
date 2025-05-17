@@ -21,3 +21,20 @@ spec:
       containers:
       - name: nginx
         image: nginx
+
+---
+kind: Service
+apiVersion: v1 
+
+metadata: 
+  name: nginx 
+
+spec: 
+  selector:
+    app: nginx
+    tier: frontend
+  ports: 
+  - name: nginx-service-port 
+    protocol: TCP
+    port: 80 #this is service port 
+    targetPort: 80  #this is container port here you can use names of the ports aswell example: http-web-svc
