@@ -1,0 +1,23 @@
+apiVersion: apps/v1     #This tells Kubernetes which API version to use for this object (apps/v1 is used for ReplicaSet).
+kind: ReplicaSet         #You're creating a ReplicaSet, not a Pod or Deployment.
+metadata:
+  name: nginx            #Name of the ReplicaSet.
+  labels:                #these are replicaset labels(Labels applied to the ReplicaSet itself, not the pods.)
+    app: nginx
+    tier: frontend
+spec:
+  # modify replicas according to your case
+  replicas: 3            #Create 3 identical Pods.
+  selector:              #these are used to select the pod to create replicas (This tells ReplicaSet:"Look for pods that have these labels."If a pod matches, it's part of the ReplicaSet.)
+    matchLabels:
+      app: nginx
+      tier: frontend                      
+  template:              #this is pod template(or)pod defination (Pod Template — What kind of pod should be created)
+    metadata:
+      labels:            #this lables belong to pod (Any new pods created by this ReplicaSet will have these labels.)
+        app: nginx
+        tier: frontend
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
