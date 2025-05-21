@@ -34,9 +34,9 @@ spec:
   - name: nginx
     image: nginx
     volumeMounts:            #volumemount is equlent to docker run -v hostpath:containerpath
-    - name: ebs-static-pv-mount
+    - name: my-ebs-volume     # name inside the container
       mountPath: /usr/share/nginx/html #in this path ebs volume should access 
   volumes:
-  - name: ebs-static-pv-stoarge
+  - name: my-ebs-volume       # this must match the name above in volume mount
     persistentVolumeClaim:
       claimName: ebs-static-claim
