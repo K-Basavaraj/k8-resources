@@ -24,3 +24,19 @@ spec:
   resources:
     requests:
       storage: 5Gi  #there is 20gb you cant ask/acces more than that
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ebs-static
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    volumeMounts:            #volumemount is equlent to docker run -v hostpath:containerpath
+    - name: ebs-static-pv-mount
+      mountPath: /usr/share/nginx/html #in this path ebs volume should access 
+  volumes:
+  - name: ebs-static-pv-stoarge
+    persistentVolumeClaim:
+      claimName: ebs-static-claim
