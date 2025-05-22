@@ -2,5 +2,7 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: expense-ebs-stgclass
+
+reclaimPolicy: Retain # default value is Delete so we need to make it Retain
 provisioner: ebs.csi.aws.com
 volumeBindingMode: WaitForFirstConsumer #storage will be created when pods is getting created 
