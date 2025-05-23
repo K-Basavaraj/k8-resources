@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: PersistentVolumeClaim  #this is pvc(claim)
+metadata:
+  name: ebs-dynamic-claim
+spec:
+  storageClassName: "expense-ebs-stgclass" #this is dynamic prov we need to provide that name which we craete
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi  #there is 20gb you cant ask/acces more than that
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ebs-dynamic
+  labels: 
+    purpose: ebs-dynamic
+spec:
+  #nodeSelector:
+   #topology.kubernetes.io/zone: us-east-1d #always check this using node labels to get the zone deatils
+  containers:
+  - name: nginx
+    image: nginx
+    volumeMounts:            #volumemount is equlent to docker run -v hostpath:containerpath
+    - name: my-ebs-volume     # name inside the container
+      mountPath: /usr/share/nginx/html #in this path ebs volume should access 
+  volumes:
+  - name: my-ebs-volume       # this must match the name above in volume mount
+    persistentVolumeClaim:
+      claimName: ebs-dynamic-claim
+---
+kind: Service
+apiVersion: v1 
+
+metadata: 
+  name: nginx-lb
+  
+spec: 
+  type: LoadBalancer
+  selector:
+    purpose: ebs-dynamic   # it should match with pod labels
+  ports: 
+  - name: nginx-service-port 
+    protocol: TCP
+    port: 80  # Service port (exposed to the outside world)
+    targetPort: 80 #this is service port 
+    nodePort: 30007 #open this port in awsnsg(sg)
