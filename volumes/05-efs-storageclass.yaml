@@ -1,0 +1,10 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: efs-stoarge-class
+provisioner: efs.csi.aws.com
+parameters:
+  provisioningMode: efs-ap
+  fileSystemId: fs-080da173b840626e4
+  directoryPerms: "700" #to create accesspoint need permissions
+  basePath: "/expense" # optional
