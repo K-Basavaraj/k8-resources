@@ -21,7 +21,7 @@ metadata:
 spec:
   volumeName: efs-static-pv
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   storageClassName: ""
   resources:
     requests:
