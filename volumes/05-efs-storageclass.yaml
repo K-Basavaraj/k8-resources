@@ -5,6 +5,6 @@ metadata:
 provisioner: efs.csi.aws.com
 parameters:
   provisioningMode: efs-ap
-  fileSystemId: fs-080da173b840626e4
+  fileSystemId: fs-0acf6ade28a0fb642
   directoryPerms: "700" #to create accesspoint need permissions
   basePath: "/expense" # optional
